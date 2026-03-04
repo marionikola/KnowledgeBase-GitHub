@@ -2,7 +2,7 @@
 
 > Rencana Pengembangan dan Tracking Progress Project
 
-**Version**: 2.0.0-20260304-Selasa-23:48 WIB
+**Version**: 2.1.0-20260304-Selasa-23:48 WIB
 **Last Updated**: 2026-03-04
 **Maintained by**: waktuberhenti
 
