@@ -1,6 +1,6 @@
 # 📦 GitHub Project Blueprint
 
-[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/waktuberhenti/github-project-blueprint.svg)](https://github.com/waktuberhenti/github-project-blueprint/issues)
 [![GitHub Stars](https://img.shields.io/github/stars/waktuberhenti/github-project-blueprint.svg)](https://github.com/waktuberhenti/github-project-blueprint/stargazers)
@@ -172,12 +172,13 @@ Project ini dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE
 
 ## 🗺️ Phase Pengembangan
 
-### Phase 1: Foundation (v1.0.0)
+### Phase 1: Foundation (v1.0.0) ✅
 - [x] Struktur folder dasar
 - [x] Dokumentasi standar
 - [x] Template GitHub
 
-### Phase 2: Enhancement (v1.1.0)
+### Phase 2: Enhancement (v1.1.0) 🔄 IN PROGRESS
+- [-] Enhanced documentation (ARCHITECTURE.md, DEVELOPMENT_GUIDE.md)
 - [ ] GitHub Actions workflows
 - [ ] Automated testing setup
 - [ ] Documentation site
@@ -209,6 +210,6 @@ Kontribusi sangat diterima! Silakan lihat [CONTRIBUTING.md](docs/CONTRIBUTING.md
 
 *Dibuat dengan ❤️ oleh waktuberhenti*
 
-**Version**: 1.0.1-20260304-Selasa-23:40 WIB
+**Version**: 1.1.0-20260304-Selasa-23:48 WIB
 
 </div>
