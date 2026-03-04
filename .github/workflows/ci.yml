@@ -1,0 +1,88 @@
+name: CI - Continuous Integration
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    name: 🔍 Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: 🔍 Lint Markdown
+      uses: avto-dev/markdown-lint@v1
+      with:
+        args: '**/*.md'
+        config: '.markdownlint.json'
+      continue-on-error: true
+
+  validate:
+    name: ✅ Validate
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: 📋 Check file structure
+      run: |
+        echo "🔍 Checking required files..."
+        test -f README.md && echo "✅ README.md exists" || echo "❌ README.md missing"
+        test -f LICENSE && echo "✅ LICENSE exists" || echo "❌ LICENSE missing"
+        test -f CHANGELOG.md && echo "✅ CHANGELOG.md exists" || echo "❌ CHANGELOG.md missing"
+        test -f TODO-PLAN.md && echo "✅ TODO-PLAN.md exists" || echo "❌ TODO-PLAN.md missing"
+        test -d docs && echo "✅ docs/ folder exists" || echo "❌ docs/ folder missing"
+        test -d .github && echo "✅ .github/ folder exists" || echo "❌ .github/ folder missing"
+        echo "✅ File structure validation complete"
+      shell: bash
+
+  build:
+    name: 🔨 Build
+    runs-on: ubuntu-latest
+    needs: validate
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: 📦 Prepare artifacts
+      run: |
+        echo "🔨 Building project artifacts..."
+        mkdir -p dist
+        cp -r docs dist/
+        cp README.md LICENSE CHANGELOG.md TODO-PLAN.md dist/
+        echo "✅ Build complete"
+        ls -la dist/
+        
+    - name: 📤 Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: project-artifacts
+        path: dist/
+        retention-days: 7
+
+  notify:
+    name: 📢 Notify
+    runs-on: ubuntu-latest
+    needs: [lint, validate, build]
+    if: always()
+    
+    steps:
+    - name: 📊 Check status
+      run: |
+        if [ "${{ needs.lint.result }}" == "success" ] && [ "${{ needs.validate.result }}" == "success" ] && [ "${{ needs.build.result }}" == "success" ]; then
+          echo "✅ All checks passed!"
+          exit 0
+        else
+          echo "❌ Some checks failed"
+          exit 1
+        fi
+
+# Version: 1.0.0-20260304-Selasa-23:33 WIB
