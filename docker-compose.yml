@@ -1,0 +1,76 @@
+# Docker Compose for Development Environment
+# Version: 2.2.0-20260304-Selasa-23:48 WIB
+# Maintained by: waktuberhenti
+
+version: '3.8'
+
+services:
+  # Main application service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: gbp-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    env_file:
+      - .env.development
+    command: npm run dev
+    networks:
+      - gbp-network
+    depends_on:
+      - redis
+      - postgres
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: gbp-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - gbp-network
+    command: redis-server --appendonly yes
+
+  # PostgreSQL database
+  postgres:
+    image: postgres:15-alpine
+    container_name: gbp-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=gbp_user
+      - POSTGRES_PASSWORD=gbp_password
+      - POSTGRES_DB=gbp_database
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - gbp-network
+
+  # Documentation site (GitHub Pages locally)
+  docs:
+    image: nginx:alpine
+    container_name: gbp-docs
+    ports:
+      - "4000:80"
+    volumes:
+      - ./docs:/usr/share/nginx/html:ro
+    networks:
+      - gbp-network
+
+networks:
+  gbp-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+  postgres-data:
