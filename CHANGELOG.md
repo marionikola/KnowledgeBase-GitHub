@@ -15,6 +15,47 @@ dan project ini mengikuti [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ---
 
+## [2.2.0] - 20260304 - Selasa - 23:48 WIB
+
+### ⚡ Phase 5: Optimization Release
+
+#### Added
+- **Code Quality & Security Workflows**
+  - `.github/workflows/code-quality.yml` - Comprehensive code quality checks
+  - EditorConfig validation
+  - Markdown linting
+  - YAML syntax checking
+  - CodeQL security analysis
+  - Trivy vulnerability scanning
+  - Dependency review for PRs
+
+- **GitHub Pages Documentation Site**
+  - `.github/workflows/pages.yml` - Automated documentation deployment
+  - Static site generation from docs/
+  - Automatic deployment on docs changes
+  - GitHub Pages integration
+
+- **Docker Compose for Development**
+  - `docker-compose.yml` - Complete development stack
+  - App service with hot reload
+  - Redis for caching
+  - PostgreSQL database
+  - Documentation site (nginx)
+  - Shared network and volumes
+
+#### Changed
+- **Version Update**: Bump to v2.2.0 marking Phase 5 commencement
+- **Documentation Enhancement**: Added Docker Compose documentation
+- **CI/CD Enhancement**: Added code quality and security workflows
+
+#### Technical Improvements
+- **Security**: CodeQL and Trivy vulnerability scanning
+- **Quality**: EditorConfig and markdown linting
+- **Documentation**: GitHub Pages automated deployment
+- **Development**: Docker Compose for consistent environment
+
+---
+
 ## [2.1.0] - 20260304 - Selasa - 23:48 WIB
 
 ### 🎨 Phase 4: Polish Release
