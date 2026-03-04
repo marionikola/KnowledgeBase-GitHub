@@ -15,6 +15,24 @@ dan project ini mengikuti [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ---
 
+## [1.0.1] - 20260304 - Selasa - 23:40 WIB
+
+### 🔄 Update Release
+
+#### Added
+- **CONTEXT.md** - Dokumentasi konteks dan informasi project
+  - Project overview dan background
+  - Target audience analysis
+  - Decisions & rationale
+  - Known issues dan future considerations
+  - Success metrics dan dependencies
+
+#### Changed
+- **Version Update** - Versi naik dari 1.0.0 ke 1.0.1
+- **Documentation Enhancement** - Penambahan dokumentasi konteks
+
+---
+
 ## [1.0.0] - 20260304 - Selasa - 23:33 WIB
 
 ### 🎉 Initial Release
