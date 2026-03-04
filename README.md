@@ -1,6 +1,6 @@
 # 📦 GitHub Project Blueprint
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.2.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/waktuberhenti/github-project-blueprint.svg)](https://github.com/waktuberhenti/github-project-blueprint/issues)
 [![GitHub Stars](https://img.shields.io/github/stars/waktuberhenti/github-project-blueprint.svg)](https://github.com/waktuberhenti/github-project-blueprint/stargazers)
