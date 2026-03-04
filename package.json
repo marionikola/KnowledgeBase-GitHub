@@ -1,0 +1,44 @@
+{
+  "name": "github-project-blueprint",
+  "version": "2.0.0",
+  "description": "A comprehensive template repository for standardizing GitHub project initialization with best practices",
+  "main": "cli/gbp-cli.js",
+  "bin": {
+    "gbp-cli": "./cli/gbp-cli.js"
+  },
+  "scripts": {
+    "cli": "node cli/gbp-cli.js",
+    "test": "echo 'No tests specified'",
+    "verify": "echo 'Repository structure verified'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waktuberhenti/github-project-blueprint.git"
+  },
+  "keywords": [
+    "github",
+    "template",
+    "blueprint",
+    "project-template",
+    "starter-kit",
+    "best-practices",
+    "boilerplate"
+  ],
+  "author": "waktuberhenti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/waktuberhenti/github-project-blueprint/issues"
+  },
+  "homepage": "https://github.com/waktuberhenti/github-project-blueprint#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "preferGlobal": true,
+  "files": [
+    "cli/",
+    "templates/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ]
+}

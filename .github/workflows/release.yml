@@ -1,0 +1,89 @@
+name: Release - Automated Release Workflow
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  release:
+    name: 🚀 Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: 📋 Get version from tag
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+    
+    - name: 📝 Generate Release Notes
+      id: release_notes
+      run: |
+        # Extract changelog section for this version
+        VERSION="${{ steps.get_version.outputs.VERSION }}"
+        NOTES=$(awk "/## \\[$VERSION\\]/{flag=1; next} /## \\[/{flag=0} flag" CHANGELOG.md)
+        
+        if [ -z "$NOTES" ]; then
+          NOTES="Release version $VERSION"
+        fi
+        
+        # Escape for GitHub Actions
+        NOTES="${NOTES//'%'/'%25'}"
+        NOTES="${NOTES//$'\n'/'%0A'}"
+        NOTES="${NOTES//$'\r'/'%0D'}"
+        
+        echo "NOTES<<EOF" >> $GITHUB_OUTPUT
+        echo "$NOTES" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+    
+    - name: 🏷️ Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ steps.get_version.outputs.VERSION }}
+        body: ${{ steps.release_notes.outputs.NOTES }}
+        draft: false
+        prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') || contains(github.ref, 'rc') }}
+    
+    - name: 📦 Build Release Artifacts
+      run: |
+        mkdir -p dist
+        zip -r dist/github-project-blueprint-${{ steps.get_version.outputs.VERSION }}.zip . \
+          -x ".git/*" \
+          -x "node_modules/*" \
+          -x "dist/*" \
+          -x ".env*"
+        tar -czf dist/github-project-blueprint-${{ steps.get_version.outputs.VERSION }}.tar.gz \
+          --exclude=".git" \
+          --exclude="node_modules" \
+          --exclude="dist" \
+          --exclude=".env*" \
+          .
+    
+    - name: 📤 Upload Release Assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/github-project-blueprint-${{ steps.get_version.outputs.VERSION }}.zip
+        asset_name: github-project-blueprint-${{ steps.get_version.outputs.VERSION }}.zip
+        asset_content_type: application/zip
+    
+    - name: 🔔 Notify Release
+      run: |
+        echo "🎉 Release ${{ steps.get_version.outputs.VERSION }} has been published!"
+        echo "📦 Assets built and uploaded successfully"
+
+# Version: 2.0.0-20260304-Selasa-23:48 WIB
+# Maintained by: waktuberhenti

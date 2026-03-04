@@ -15,6 +15,46 @@ dan project ini mengikuti [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ---
 
+## [2.0.0] - 20260304 - Selasa - 23:48 WIB
+
+### 🎯 Phase 3: Scale Release
+
+#### Added
+- **Multi-Project Template Support**
+  - [`templates/`](templates/) directory dengan struktur template profesional
+  - Template untuk Web Application, Library, API Backend, Documentation Site, Mobile App
+  - Template metadata system dengan template.json
+  - Dokumentasi komprehensif untuk template system
+
+- **CLI Tooling (gbp-cli)**
+  - [`cli/gbp-cli.js`](cli/gbp-cli.js) - Command-line interface untuk project generation
+  - Commands: create, list, info, help, version
+  - Support untuk custom templates dan output paths
+  - Interactive project setup
+
+- **Advanced Automation**
+  - [`.github/dependabot.yml`](.github/dependabot.yml) - Automated dependency updates
+  - [`.github/workflows/release.yml`](.github/workflows/release.yml) - Automated release workflow
+  - [`package.json`](package.json) - NPM package configuration dengan CLI bin
+  - Automated release notes generation dari CHANGELOG.md
+
+- **Enhanced Repository Structure**
+  - CLI tooling integration
+  - Template marketplace foundation
+  - NPM package distribution ready
+
+#### Technical Improvements
+- **Automation**: Dependabot untuk dependency management
+- **Release Management**: Automated release dengan GitHub Actions
+- **Distribution**: NPM package ready untuk global installation
+- **Scalability**: Multi-template architecture untuk berbagai project types
+
+#### Breaking Changes
+- Major version bump ke v2.0.0 menandai maturity project
+- CLI tooling introduces new way of project creation
+
+---
+
 ## [1.1.0] - 20260304 - Selasa - 23:48 WIB
 
 ### 🚀 Phase 2: Enhancement Release
